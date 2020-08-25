@@ -186,6 +186,7 @@ module.exports = {
         ...this._getIncludesForDir(addonTestSupportDir, `${addonName}/test-support`)
       ];
     }
+    return [];
   },
 
   /**
@@ -201,15 +202,13 @@ module.exports = {
         addonDir,
         "addon-test-support"
       );
-      return concat(
-        acc,
-        this._getIncludesForDir(addonAppDir, this.parent.name()),
-        this._getIncludesForDir(addonAddonDir, addon.name),
-        this._getIncludesForDir(
-          addonAddonTestSupportDir,
-          `${addon.name}/test-support`
-        )
-      );
+
+      return [
+        ...acc,
+        ...this._getIncludesForDir(addonAppDir, this.parent.name()),
+        ...this._getIncludesForDir(addonAddonDir, addon.name),
+        ...this._getIncludesForDir(addonAddonTestSupportDir, `${addon.name}/test-support`)
+      ];
     }, []);
   },
 
